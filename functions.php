@@ -12,16 +12,28 @@ add_action('wp_enqueue_scripts', function () {
 });
 
 
-// Defer JS
+// Defer or async JS
 
-function defer_parsing_of_js($url)
+add_filter('script_loader_tag', 'add_defer_tags_to_scripts');
+function add_defer_tags_to_scripts($tag)
 {
-  if (is_user_logged_in()) return $url; //don't break WP Admin
-  if (FALSE === strpos($url, '.js')) return $url;
-  if (strpos($url, 'jquery.js')) return $url;
-  return str_replace(' src', ' defer src', $url);
+  # List scripts to add attributes to
+  $scripts_to_defer = array('main.bundle.js', 'script_b');
+  $scripts_to_async = array('script_c', 'script_d');
+
+  # add the defer tags to scripts_to_defer array
+  foreach ($scripts_to_defer as $current_script) {
+    if (true == strpos($tag, $current_script))
+      return str_replace(' src', ' defer="defer" src', $tag);
+  }
+
+  # add the async tags to scripts_to_async array
+  // foreach ($scripts_to_async as $current_script) {
+  //   if (true == strpos($tag, $current_script))
+  //     return str_replace(' src', ' async="async" src', $tag);
+  // }
+  return $tag;
 }
-add_filter('script_loader_tag', 'defer_parsing_of_js', 10);
 
 // Title tag support
 add_theme_support('title-tag');
