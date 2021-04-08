@@ -37,3 +37,6 @@ function add_defer_tags_to_scripts($tag)
 
 // Title tag support
 add_theme_support('title-tag');
+
+// Thumbnail support
+add_theme_support('post-thumbnails');
