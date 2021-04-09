@@ -14,7 +14,7 @@ module.exports = {
   plugins: [
     new BrowserSyncPlugin(
       {
-        proxy: "Your URL here",
+        proxy: "theme.local",
         files: ["**/*.php", "**/*.css", "**/*.js"],
         port: 3000,
         notify: false,
@@ -51,9 +51,13 @@ module.exports = {
           {
             loader: "postcss-loader",
             options: {
-              ident: "postcss",
-              plugins: [require("tailwindcss"), require("autoprefixer")],
-            },
+
+              postcssOptions: {
+                ident: 'postcss',
+                plugins: [require("tailwindcss"), require("autoprefixer")],
+
+              },
+            }
           },
         ],
       },
