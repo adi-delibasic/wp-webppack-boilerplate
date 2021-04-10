@@ -2,6 +2,8 @@
 
 Quick setup for WordPress theme development with Tailwind
 
+### Updated to Tailwind 2.0
+
 ## How To Use It
 
 1. Clone the respository
